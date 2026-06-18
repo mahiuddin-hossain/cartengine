@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CartEngine - AI-Powered Shopping Decision Engine & Deal Finder</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Find the best deals and compare prices across top Bangladesh electronics and e-commerce stores including Star Tech, Ryans, and Daraz. AI-powered shopping advisor.">
+  <meta name="keywords"
+    content="price comparison bangladesh, star tech, ryans, daraz, pc component deals, mobile price bd">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS v4 Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Styling Config -->
+  <style type="text/tailwindcss">
+    @theme {
+      --color-brand-bg: #0B0F19;
+      --font-display: 'Outfit', sans-serif;
+      --font-sans: 'Inter', sans-serif;
+    }
+  </style>
+
+  <style>
+    /* Custom Scrollbar for sleek dark mode */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0B0F19;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1F2937;
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #374151;
+    }
+
+    body {
+      background-color: #0B0F19;
+      background-image:
+        radial-gradient(at top center, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+        radial-gradient(at 10% 20%, rgba(99, 102, 241, 0.04) 0px, transparent 40%);
+    }
+
+    /* Skeleton Glow Animation */
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        opacity: 0.6;
+        background-color: rgba(31, 41, 55, 0.6);
+      }
+
+      50% {
+        opacity: 1;
+        background-color: rgba(55, 65, 81, 0.8);
+      }
+    }
+
+    .skeleton-animate {
+      animation: pulse-glow 1.5s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body
+  class="font-sans antialiased text-gray-200 min-h-full flex flex-col selection:bg-emerald-500 selection:text-white">
+
+  <!-- Header Section -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-brand-bg/85 border-b border-white/5 px-4 sm:px-6 lg:px-8 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+
+      <!-- Top Left: Logo -->
+      <a href="/" class="flex items-center gap-2 group shrink-0" id="logo-link">
+        <div
+          class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-300">
+          <!-- Premium Cart Vector Icon -->
+          <svg class="w-5.5 h-5.5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z">
+            </path>
+          </svg>
+        </div>
+        <div class="hidden sm:block">
+          <span
+            class="font-display font-extrabold text-xl tracking-tight text-white group-hover:text-emerald-400 transition-colors">
+            Cart<span class="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">Engine</span>
+          </span>
+          <span class="block text-[10px] text-gray-500 font-medium tracking-widest uppercase -mt-1">Bangladesh</span>
+        </div>
+      </a>
+
+      <!-- Top Center: Curved Search Bar -->
+      <div class="flex-1 max-w-2xl">
+        <form id="search-form" class="relative group">
+          <div
+            class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-emerald-400 transition-colors duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z"></path>
+            </svg>
+          </div>
+          <input type="text" id="search-input" placeholder="Search processors, laptops, smartphones..."
+            autocomplete="off"
+            class="w-full pl-11 pr-12 py-3 bg-white/5 border border-white/10 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/80 focus:bg-white/8 transition-all duration-300 shadow-inner text-sm md:text-base" />
+          <!-- Clear Button -->
+          <button type="button" id="clear-search"
+            class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-white hidden transition-colors duration-200"
+            title="Clear Search">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- Top Right: Profile Icon -->
+      <div class="flex items-center gap-3 shrink-0">
+        <button
+          class="relative w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300 group"
+          id="profile-button">
+          <!-- Profile User Vector Icon -->
+          <svg class="w-5.5 h-5.5 text-gray-400 group-hover:text-emerald-400 transition-colors" fill="none"
+            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z">
+            </path>
+          </svg>
+          <span
+            class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-brand-bg rounded-full"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col">
+
+    <!-- Hero / Status Section -->
+    <div id="welcome-message" class="text-center my-12 max-w-2xl mx-auto transition-all duration-500">
+      <h1 class="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight leading-none mb-4">
+        AI-Powered Shopping Advisor & <span
+          class="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">Deal Finder</span>
+      </h1>
+      <p class="text-gray-400 text-sm sm:text-lg mb-8 font-light">
+        Compare real-time prices across Star Tech, Ryans, and Daraz to find the lowest deals in Bangladesh.
+      </p>
+
+      <!-- Quick search helper pill tags -->
+      <div class="flex flex-wrap justify-center gap-2">
+        <span class="text-xs text-gray-400 self-center mr-1">Try searching:</span>
+        <button
+          class="quick-search-btn text-xs bg-white/5 border border-white/10 hover:border-emerald-500/30 hover:bg-emerald-500/5 px-3 py-1.5 rounded-full transition-all duration-300 text-gray-300">Ryzen
+          5 5600</button>
+        <button
+          class="quick-search-btn text-xs bg-white/5 border border-white/10 hover:border-emerald-500/30 hover:bg-emerald-500/5 px-3 py-1.5 rounded-full transition-all duration-300 text-gray-300">RTX
+          4060</button>
+        <button
+          class="quick-search-btn text-xs bg-white/5 border border-white/10 hover:border-emerald-500/30 hover:bg-emerald-500/5 px-3 py-1.5 rounded-full transition-all duration-300 text-gray-300">16GB
+          DDR4 RAM</button>
+      </div>
+    </div>
+
+    <!-- Search Status / Filter Panel (Initially hidden) -->
+    <div id="search-summary-panel"
+      class="hidden flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-white/5 transition-opacity duration-300">
+      <div>
+        <h2 class="text-lg font-display font-semibold text-white">
+          Search results for: <span id="search-query-text" class="text-emerald-400">""</span>
+        </h2>
+        <p class="text-xs text-gray-400 mt-1">
+          Found <span id="result-count" class="text-white font-medium">0</span> matches, sorted automatically from
+          lowest to highest price.
+        </p>
+      </div>
+
+      <!-- Sort indicator -->
+      <div
+        class="flex items-center gap-2 text-xs bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full border border-emerald-500/20">
+        <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m4.75-.75 3 3m0 0 3-3m-3 3v-7.5"></path>
+        </svg>
+        <span>Best Price First (Lowest to Highest)</span>
+      </div>
+    </div>
+
+    <!-- Product Grid & Loading Container -->
+    <div class="relative min-h-[400px]">
+
+      <!-- 1. Skeleton Loader Grid (6 cards, curved rectangular design, hidden by default) -->
+      <div id="skeleton-grid" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Skeleton Card Template (Repeated 6 times) -->
+        <template id="skeleton-card-template">
+          <div
+            class="bg-white/[0.02] border border-white/5 rounded-2xl p-5 flex flex-col justify-between h-full overflow-hidden relative">
+            <div class="space-y-4">
+              <!-- Site Source Badge skeleton -->
+              <div class="w-24 h-5 rounded-full skeleton-animate"></div>
+              <!-- Product Image skeleton -->
+              <div class="w-full aspect-square rounded-xl skeleton-animate"></div>
+              <!-- Title skeleton -->
+              <div class="space-y-2">
+                <div class="w-full h-4 rounded skeleton-animate"></div>
+                <div class="w-2/3 h-4 rounded skeleton-animate"></div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-white/5 flex items-end justify-between">
+              <!-- Price skeleton -->
+              <div class="space-y-2">
+                <div class="w-16 h-3 rounded skeleton-animate"></div>
+                <div class="w-24 h-6 rounded skeleton-animate"></div>
+              </div>
+              <!-- Button skeleton -->
+              <div class="w-24 h-9 rounded-full skeleton-animate"></div>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- 2. Actual Product Grid (Initially empty, loaded dynamically) -->
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Cards injected via Javascript -->
+      </div>
+
+      <!-- 3. Empty State / No Results found (Hidden by default) -->
+      <div id="empty-state" class="hidden text-center py-20">
+        <div
+          class="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/10 text-gray-500">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.602 10.602Z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-white">No products found</h3>
+        <p class="text-sm text-gray-400 mt-1">Try adjusting your keywords or search for components like 'Ryzen' or
+          'RTX'.</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="mt-auto border-t border-white/5 bg-brand-bg py-6 text-center text-xs text-gray-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <p>&copy; 2026 CartEngine.online. Built for smart shoppers in Bangladesh.</p>
+      </div>
+      <div class="flex gap-4">
+        <span class="flex items-center gap-1.5 text-emerald-500/80">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          Cloudflare Edge Caching Active (0-Cost Infrastructure)
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Javascript Logic -->
+  <script>
+    // Product search logic via Firebase functions API
+
+
+    // DOM Elements
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const clearSearchBtn = document.getElementById('clear-search');
+    const welcomeMessage = document.getElementById('welcome-message');
+    const searchSummaryPanel = document.getElementById('search-summary-panel');
+    const productGrid = document.getElementById('product-grid');
+    const skeletonGrid = document.getElementById('skeleton-grid');
+    const skeletonTemplate = document.getElementById('skeleton-card-template');
+    const emptyState = document.getElementById('empty-state');
+    const quickSearchButtons = document.querySelectorAll('.quick-search-btn');
+
+    // Init skeleton loader grid
+    function initSkeletons() {
+      skeletonGrid.innerHTML = '';
+      for (let i = 0; i < 6; i++) {
+        const clone = skeletonTemplate.content.cloneNode(true);
+        skeletonGrid.appendChild(clone);
+      }
+    }
+    initSkeletons();
+
+    // Toggle Clear button visibility based on search value
+    searchInput.addEventListener('input', () => {
+      if (searchInput.value.trim().length > 0) {
+        clearSearchBtn.classList.remove('hidden');
+      } else {
+        clearSearchBtn.classList.add('hidden');
+      }
+    });
+
+    // Clear Search Input
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      clearSearchBtn.classList.add('hidden');
+      searchInput.focus();
+    });
+
+    // Handle Quick Search tags
+    quickSearchButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        searchInput.value = btn.textContent;
+        clearSearchBtn.classList.remove('hidden');
+        performSearch(btn.textContent);
+      });
+    });
+
+    // Form Submission
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const query = searchInput.value.trim();
+      if (query.length > 0) {
+        performSearch(query);
+      }
+    });
+
+    // Main Search Action
+    async function performSearch(query) {
+      // 1. Clear previous content and hide layouts
+      productGrid.innerHTML = '';
+      welcomeMessage.classList.add('opacity-0', 'scale-95');
+      setTimeout(() => {
+        welcomeMessage.classList.add('hidden');
+      }, 300);
+      emptyState.classList.add('hidden');
+      searchSummaryPanel.classList.add('hidden');
+
+      // 2. Show skeletons
+      skeletonGrid.classList.remove('hidden');
+
+      try {
+        // Fetch from actual backend API endpoint (routed to Cloud Function)
+        const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const data = await response.json();
+
+        // Hide skeletons
+        skeletonGrid.classList.add('hidden');
+
+        if (!response.ok || !data.products) {
+          throw new Error(data.message || 'Failed to fetch search results');
+        }
+
+        const results = data.products;
+
+        // Render search status UI
+        document.getElementById('search-query-text').textContent = `"${query}"`;
+        document.getElementById('result-count').textContent = results.length;
+        searchSummaryPanel.classList.remove('hidden');
+        searchSummaryPanel.classList.add('flex');
+
+        if (results.length === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          // Render results
+          results.forEach(product => {
+            // Site color styling based on source website
+            let sourceBadgeStyle = '';
+            if (product.shopName.includes('Star Tech')) {
+              sourceBadgeStyle = 'bg-red-500/10 text-red-400 border-red-500/20';
+            } else if (product.shopName.includes('Ryans')) {
+              sourceBadgeStyle = 'bg-blue-500/10 text-blue-400 border-blue-500/20';
+            } else {
+              sourceBadgeStyle = 'bg-orange-500/10 text-orange-400 border-orange-500/20';
+            }
+
+            const card = document.createElement('div');
+            // Premium curved card with shadow and interactive glow borders
+            card.className = "bg-white/[0.02] border border-white/5 rounded-2xl p-5 flex flex-col justify-between h-full hover:border-emerald-500/30 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)] hover:-translate-y-1 transition-all duration-300 group overflow-hidden relative";
+
+            card.innerHTML = `
+              <div>
+                <!-- Source Badge -->
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${sourceBadgeStyle}">
+                    ${product.shopName}
+                  </span>
+                </div>
+                
+                <!-- Product Image -->
+                <div class="w-full aspect-square rounded-xl bg-white/[0.01] border border-white/5 overflow-hidden flex items-center justify-center mb-4 group-hover:bg-white/[0.02] transition-colors relative">
+                  <img src="${product.image}" alt="${product.title}" class="object-contain w-full h-full p-2 opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" onerror="this.src='https://placehold.co/300x200/0B0F19/FFF?text=Product+Image'"/>
+                </div>
+
+                <!-- Product Details -->
+                <h3 class="font-display font-medium text-sm text-white group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
+                  ${product.title}
+                </h3>
+              </div>
+
+              <!-- Price & CTA Button (Bottom section) -->
+              <div class="mt-4 pt-4 border-t border-white/5 flex items-end justify-between">
+                <div>
+                  <span class="text-[10px] text-gray-500 block leading-none mb-1">Price</span>
+                  <span class="text-lg font-bold text-white bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    ৳ ${product.price.toLocaleString('en-IN')}
+                  </span>
+                </div>
+                
+                <a href="${product.link}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-full flex items-center gap-1 shadow-lg shadow-emerald-950/20 group-hover:shadow-emerald-500/10 transition-all duration-300">
+                  Buy Offer
+                  <svg class="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+                  </svg>
+                </a>
+              </div>
+            `;
+            productGrid.appendChild(card);
+          });
+        }
+      } catch (err) {
+        console.error('Search error:', err);
+        skeletonGrid.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        document.querySelector('#empty-state h3').textContent = 'Error fetching deals';
+        document.querySelector('#empty-state p').textContent = err.message || 'Please check your connection and try again.';
+      }
+    }
+  </script>
+</body>
+
+</html>
